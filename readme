@@ -1,0 +1,77 @@
+🎬 Movie Ticket Booking System
+
+A Movie Ticket Booking System developed using Java, JDBC, and MySQL.
+
+This project allows users to view movies, theaters, and shows, book movie tickets, validate seat availability, and manage booking records using CRUD operations.
+
+📌 Project Overview
+
+The Movie Ticket Booking System is a console-based Java application that demonstrates how to connect a Java application with a MySQL database using JDBC (Java Database Connectivity).
+
+The application provides functionality for:
+
+Movie Management
+Theater Management
+Show Management
+Movie Ticket Booking
+Seat Validation
+Booking Management
+Transaction Management
+Ticket Generation
+CRUD Operations
+🚀 Features
+🎥 Movie Management
+Add a new movie
+View all movies
+Search movie by ID
+Update movie details
+Delete movie
+🏢 Theater Management
+Add theater
+View theaters
+Update theater details
+Delete theater
+🎞️ Show Management
+Add movie shows
+View available shows
+Display movie and theater details using SQL JOIN
+Manage available seats
+🎟️ Ticket Booking
+Select a movie show
+Enter customer details
+Select number of seats
+Validate available seats
+Calculate ticket amount
+Generate booking ID
+Confirm booking
+🔐 Transaction Management
+
+The booking process uses JDBC transactions:
+
+START TRANSACTION
+       ↓
+Check Available Seats
+       ↓
+Validate Seats
+       ↓
+Insert Booking
+       ↓
+Update Available Seats
+       ↓
+COMMIT
+
+If any operation fails:
+
+ROLLBACK
+
+This prevents incorrect seat counts and incomplete bookings.
+
+🛠️ Technologies Used
+Technology	Purpose
+Java 17	Application development
+JDBC	Database connectivity
+MySQL	Database
+MySQL Connector/J	JDBC Driver
+Eclipse	Development IDE
+Git	Version control
+GitHub	Source code repository
