@@ -218,4 +218,164 @@ public class BookingDAO {
             e.printStackTrace();
         }
     }
+    public static void viewBookings() {
+
+    String sql =
+            "SELECT " +
+            "b.booking_id, " +
+            "b.customer_name, " +
+            "m.movie_name, " +
+            "t.theater_name, " +
+            "s.show_time, " +
+            "b.seats_booked, " +
+            "b.total_amount, " +
+            "b.booking_status " +
+            "FROM bookings b " +
+            "JOIN shows s ON b.show_id = s.show_id " +
+            "JOIN movies m ON s.movie_id = m.movie_id " +
+            "JOIN theaters t ON s.theater_id = t.theater_id";
+
+    try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()
+    ) {
+
+        System.out.println("\n========== BOOKINGS ==========");
+
+        while (rs.next()) {
+
+            System.out.println(
+                    "Booking ID    : " +
+                    rs.getInt("booking_id")
+            );
+
+            System.out.println(
+                    "Customer      : " +
+                    rs.getString("customer_name")
+            );
+
+            System.out.println(
+                    "Movie         : " +
+                    rs.getString("movie_name")
+            );
+
+            System.out.println(
+                    "Theater       : " +
+                    rs.getString("theater_name")
+            );
+
+            System.out.println(
+                    "Show Time     : " +
+                    rs.getTimestamp("show_time")
+            );
+
+            System.out.println(
+                    "Seats         : " +
+                    rs.getInt("seats_booked")
+            );
+
+            System.out.println(
+                    "Amount        : ₹" +
+                    rs.getDouble("total_amount")
+            );
+
+            System.out.println(
+                    "Status        : " +
+                    rs.getString("booking_status")
+            );
+
+            System.out.println("--------------------------------");
+        }
+
+    } catch (SQLException e) {
+
+        e.printStackTrace();
+    }
+}public static void searchBooking(int bookingId) {
+
+    String sql =
+            "SELECT " +
+            "b.booking_id, " +
+            "b.customer_name, " +
+            "m.movie_name, " +
+            "t.theater_name, " +
+            "s.show_time, " +
+            "b.seats_booked, " +
+            "b.total_amount, " +
+            "b.booking_status " +
+            "FROM bookings b " +
+            "JOIN shows s ON b.show_id = s.show_id " +
+            "JOIN movies m ON s.movie_id = m.movie_id " +
+            "JOIN theaters t ON s.theater_id = t.theater_id " +
+            "WHERE b.booking_id = ?";
+
+    try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+    ) {
+
+        ps.setInt(1, bookingId);
+
+        try (ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+
+                System.out.println(
+                        "\n========== BOOKING DETAILS =========="
+                );
+
+                System.out.println(
+                        "Booking ID : " +
+                        rs.getInt("booking_id")
+                );
+
+                System.out.println(
+                        "Customer   : " +
+                        rs.getString("customer_name")
+                );
+
+                System.out.println(
+                        "Movie      : " +
+                        rs.getString("movie_name")
+                );
+
+                System.out.println(
+                        "Theater    : " +
+                        rs.getString("theater_name")
+                );
+
+                System.out.println(
+                        "Show Time  : " +
+                        rs.getTimestamp("show_time")
+                );
+
+                System.out.println(
+                        "Seats      : " +
+                        rs.getInt("seats_booked")
+                );
+
+                System.out.println(
+                        "Amount     : ₹" +
+                        rs.getDouble("total_amount")
+                );
+
+                System.out.println(
+                        "Status     : " +
+                        rs.getString("booking_status")
+                );
+
+            } else {
+
+                System.out.println(
+                        "Booking not found."
+                );
+            }
+        }
+
+    } catch (SQLException e) {
+
+        e.printStackTrace();
+    }
+}
 }
